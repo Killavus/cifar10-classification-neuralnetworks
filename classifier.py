@@ -1,5 +1,6 @@
 from fuel.datasets.cifar10 import CIFAR10
 from sklearn.cluster import KMeans
+from sklearn.linear_model import SGDClassifier
 from collections import Counter
 from scipy.stats.mstats import mode
 
@@ -46,4 +47,12 @@ def PerformKMeansAnalysis(train_data, train_labels, test_data, test_labels):
         print "Representative: ", representative
         print "======"
 
+svc = SGDClassifier(loss='squared_hinge', verbose=1, n_jobs=8, n_iter=100)
 
+svc.fit(train_data, train_labels)
+
+predictions = svc.predict(validation_data)
+
+wrong = np.nonzero(validation_labels - predictions)[0].astype(np.float).shape[0]
+
+print (float(wrong) / predictions.shape[0])

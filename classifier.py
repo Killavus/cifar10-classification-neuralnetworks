@@ -47,12 +47,10 @@ def PerformKMeansAnalysis(train_data, train_labels, test_data, test_labels):
         print "Representative: ", representative
         print "======"
 
-svc = SGDClassifier(loss='squared_hinge', verbose=1, n_jobs=8, n_iter=100)
+def ApplySGDClassifier(train_data, train_labels, test_data, test_labels):
+    svc = SGDClassifier(loss='squared_hinge', verbose=1, n_jobs=8, n_iter=100)
+    svc.fit(train_data, train_labels)
+    predictions = svc.predict(test_data)
+    wrong = np.nonzero(test_labels - predictions)[0].astype(np.float).shape[0]
+    print (float(wrong) / predictions.shape[0])
 
-svc.fit(train_data, train_labels)
-
-predictions = svc.predict(validation_data)
-
-wrong = np.nonzero(validation_labels - predictions)[0].astype(np.float).shape[0]
-
-print (float(wrong) / predictions.shape[0])

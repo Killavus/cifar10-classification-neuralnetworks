@@ -1,0 +1,6 @@
+* moved the dropout layer between dense & softmax. changed the second conv2d
+nonlinearity to tanh -> REDUCED ACCURACY (~73%)
+* changed the second conv2d nonlinearity to rectify -> REDUCED ACCURACY (~73,5%)
+* increased number of filters on second conv2d layer -> ~74%
+* moved dropout after Conv2D again, reduced features map count to 32 again ->
+76%

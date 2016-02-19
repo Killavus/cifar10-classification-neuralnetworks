@@ -43,7 +43,7 @@ NETWORK_SPEC = [
   },
   { 'type': DenseLayer,
     'args': {
-      'num_units': 200,
+      'num_units': 100,
       'nonlinearity': rectify
     }
   },
@@ -55,8 +55,8 @@ NETWORK_SPEC = [
   }
 ]
 
-LEARNING_RATE=0.001
-MOMENTUM=0.95
+LEARNING_RATE=0.01
+MOMENTUM=0.9
 
 input_values = T.tensor4('inputs')
 input_targets = T.ivector('targets')

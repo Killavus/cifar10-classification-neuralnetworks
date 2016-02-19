@@ -102,6 +102,7 @@ def TrainNeuralNetwork(input_var, targets_var, data, network, iterations=2,
         except KeyboardInterrupt:
             return lasagne.layers.get_all_param_values(network)
 
+    VerifyNetworkAccuracy("Test", input_var, targets_var, verify_data_col[-1], network)
     return lasagne.layers.get_all_param_values(network)
 
 def VerifyNetworkAccuracy(name, input_var, targets_var, data, network):
@@ -131,7 +132,6 @@ network = BuildNeuralNetwork(NETWORK_SPEC, INPUT_SPEC)
 
 train_stream, validation_stream, test_stream = LoadDataStreams()
 
-TrainNeuralNetwork(input_values, input_targets, train_stream, network, 100,
-                   [partial(VerifyNetworkAccuracy, "Validation"), 
-                    partial(VerifyNetworkAccuracy, "Test")],
+params = TrainNeuralNetwork(input_values, input_targets, train_stream, network, 100,
+                   [partial(VerifyNetworkAccuracy, "Validation")],
                    [validation_stream, test_stream])
